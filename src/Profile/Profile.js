@@ -1,5 +1,17 @@
 import React from 'react';
 import Auth from '../Auth';
+const axios = require('axios')
+
+async function test() {
+  try {
+    const res = await axios.post('http://localhost:3000/auth/login');
+    console.log('this is res', res.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+test()
 
 const generateFakeHabit = () => {
   const habitTracked = []
