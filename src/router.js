@@ -1,21 +1,23 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Login from './Login/Login'
-import Profile from './Profile/Profile'
-import Auth from './Auth'
+import Login from './views/Login/Login'
+
+import Profile from './views/Profile/Profile'
+import { auth } from './utils/auth'
 
 const Router = (props) => (
   <Switch>
-    <Route exact path='/' component={Login}/>
-    <PrivateRoute path="/profile" component={Profile} />
+    <Route exact path='/login' component={Login} />
+    <Route exact path='/newUser' component={Login} />
+    <PrivateRoute exact path="/" component={Profile} />
   </Switch>
 )
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props =>Auth.isAuthenticated() ?
+  <Route {...rest} render={props =>auth.isAuthenticated() ?
     (<Component {...props} />) :
-    (<Redirect to={{pathname: "/"}}/>)
+    (<Redirect to={{pathname: "/login"}}/>)
   }/>
 )
 

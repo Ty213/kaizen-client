@@ -10,6 +10,19 @@ async function handleLogin(email,password) {
   return true
 }
 
+const auth = {
+  isAuthenticated() {
+    const jwt = localStorage.getItem('jwt')
+    if(jwt) {
+      return true
+    }
+    return false
+  },
+  logout() {
+    localStorage.removeItem('jwt')
+  }
+};
+
 const validateEmail = (e) => {
   return e.target.validity.valid
 }
@@ -24,5 +37,6 @@ const validatePassword = (e) => {
 module.exports = {
   handleLogin,
   validateEmail,
-  validatePassword
+  validatePassword,
+  auth
 }

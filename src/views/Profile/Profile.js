@@ -1,10 +1,17 @@
 import React from 'react';
-import Auth from '../Auth';
+import { auth } from '../../utils/auth';
 const axios = require('axios')
 
 async function test() {
   try {
-    const res = await axios.post('http://localhost:3000/auth/login');
+    const res = await axios.post('http://localhost:3000/auth/login', JSON.stringify({
+      email: 'tylermoko23@gmail.com',
+      password: 'password'
+    }), {
+      headers: {
+          'Content-Type': 'application/json',
+      }
+  });
     console.log('this is res', res.data);
   } catch (error) {
     console.error(error);
@@ -31,8 +38,8 @@ const generateFakeHabit = () => {
 const Profile = props => {
 
   const handleLogout = () => {
-    Auth.logout()
-    props.history.push("/")
+    auth.logout()
+    props.history.push("/login")
   }
 
   console.log('this is gerneateFakehabit', generateFakeHabit())
